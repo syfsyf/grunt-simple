@@ -7,11 +7,17 @@ module.exports = function(grunt) {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
-      build: {
-        src: 'src/<%= pkg.name %>.js',
-        dest: 'build/<%= pkg.name %>.min.js'
-      }
-    }	
+	  my_target: {
+      files: [{
+        expand: true,
+        cwd: 'src/js',
+        src: '**/*.js',
+        dest: 'dest/js'
+      }]
+    }
+	}
+	
+	  
   });
 
   // Load the plugin that provides the "uglify" task.
