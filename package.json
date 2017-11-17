@@ -4,6 +4,7 @@
   "description": "desc",
   "repository": "none",
   "license": "BSD-3-Clause",
-  "devDependencies": {}
-  
+  "devDependencies": {
+    "grunt": "^1.0.1"
+  }
 }
