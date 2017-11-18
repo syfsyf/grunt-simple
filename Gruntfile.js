@@ -3,8 +3,9 @@
 module.exports = function (grunt) {
 
 	var DIST_DIR = 'dist';
-
+	
 	// Project configuration.
+
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		jshint: {
@@ -40,17 +41,33 @@ module.exports = function (grunt) {
 					}
 				}
 			}
+		},
+		babel: {
+			options: {
+				sourceMap: true,
+				presets: ['env']
+			},
+			dist: {
+            files: [{
+                "expand": true,
+                "cwd": "src/js",
+                "src": ["**/*.jsx"],
+                "dest": DIST_DIR+ "/js-compiled/",
+                "ext": "-compiled.js"
+            }]
+        }
 		}
 	});
 
 	// Load the plugin that provides the "uglify" task.
 	grunt.loadNpmTasks('grunt-contrib-uglify');
-
-	// Default task(s).
-	grunt.registerTask('default', ['clean','jshint','uglify']);
-
+	grunt.loadNpmTasks('grunt-babel');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-serve');
 
+	// Default task(s).
+	grunt.registerTask('default', ['clean','babel','jshint','uglify']);
+
+	
 };
